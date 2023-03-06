@@ -42,12 +42,14 @@ var state = "idle"
 
 signal progress_changed(value)
 
+var initial_camera_zoom : Vector2
 func _ready():
 	GAME.PLAYER_NODE = self
 	sword.attack_finished.connect(_on_attack_finished)
 	progress_changed.connect(func(val): attack_speed_bar.value = val)
 	decay_timer.timeout.connect(func(): decaying = true)
 	sword_area.body_entered.connect(_on_sword_body_entered)
+	initial_camera_zoom = $Camera2D.zoom
 	
 func _on_attack_finished():
 	if !has_hit:
@@ -141,4 +143,9 @@ func add_progress(value):
 	decaying = false
 	decay_timer.start(current_attack_speed+0.1)
 	progress = clamp(0.0, 1.0, progress + value)
-	
+
+func set_camera_zoom(new_camera_zoom : Vector2) -> void:
+	$Camera2D.zoom = new_camera_zoom
+
+func reset_camera_zoom() -> void:
+	$Camera2D.zoom = initial_camera_zoom
