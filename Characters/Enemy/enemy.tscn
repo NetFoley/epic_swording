@@ -1,0 +1,199 @@
+[gd_scene load_steps=21 format=3 uid="uid://jsvxlbbrskfj"]
+
+[ext_resource type="Script" path="res://Characters/Enemy/enemy.gd" id="1_s5vcf"]
+[ext_resource type="PackedScene" uid="uid://dru3yk5rkdj44" path="res://Scenes/executable.tscn" id="2_0j6gl"]
+[ext_resource type="PackedScene" uid="uid://b8gowa6d0pgu" path="res://Scenes/pixel_group.tscn" id="2_2u3no"]
+[ext_resource type="Script" path="res://Characters/Enemy/Bars.gd" id="3_6igdy"]
+[ext_resource type="Script" path="res://Characters/Enemy/LifeBar.gd" id="4_wab7j"]
+[ext_resource type="Script" path="res://addons/shaker/shaker.gd" id="4_wtfmu"]
+[ext_resource type="Script" path="res://Characters/Enemy/State.gd" id="6_ilq18"]
+[ext_resource type="Script" path="res://Characters/Enemy/Idle.gd" id="7_852rs"]
+[ext_resource type="Script" path="res://Characters/Enemy/Chase.gd" id="8_luu1n"]
+[ext_resource type="AudioStream" uid="uid://b1dovj8j760kn" path="res://Audio/Boss hit 1.wav" id="10_go5nf"]
+
+[sub_resource type="Curve" id="Curve_gjhfj"]
+max_value = 100.0
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.475671, 100), 403.43, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_qrjce"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -3.36591, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fqrvl"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_xw3js"]
+radius = 206.002
+
+[sub_resource type="Animation" id="Animation_5bhb5"]
+resource_name = "Hit"
+length = 0.1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PixelGroup/Body:modulate")
+tracks/0/interp = 0
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(10, 10, 10, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_vn7do"]
+_data = {
+"Hit": SubResource("Animation_5bhb5")
+}
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bq07w"]
+bg_color = Color(1, 1, 1, 0)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7gde0"]
+bg_color = Color(1, 0.0588235, 0.00784314, 1)
+border_width_top = 1
+border_width_bottom = 1
+border_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jtado"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h6gbh"]
+bg_color = Color(1, 0.0588235, 0.00784314, 0)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(1, 0.184314, 0.133333, 1)
+
+[node name="Enemy" type="CharacterBody2D"]
+motion_mode = 1
+wall_min_slide_angle = 0.0
+script = ExtResource("1_s5vcf")
+movement_speed = 26
+action_dist = 70
+
+[node name="Executable" parent="." instance=ExtResource("2_0j6gl")]
+
+[node name="AI" type="Node" parent="." node_paths=PackedStringArray("target")]
+script = ExtResource("6_ilq18")
+target = NodePath("..")
+debug_mode = true
+
+[node name="Idle" type="Node" parent="AI"]
+script = ExtResource("7_852rs")
+
+[node name="Chase" type="Node" parent="AI" node_paths=PackedStringArray("target")]
+script = ExtResource("8_luu1n")
+target = NodePath("../..")
+
+[node name="StunTime" type="Timer" parent="."]
+wait_time = 0.5
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+emitting = false
+lifetime = 0.29
+one_shot = true
+explosiveness = 1.0
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 122.43
+initial_velocity_max = 378.05
+damping_min = 100.0
+damping_max = 100.0
+damping_curve = SubResource("Curve_gjhfj")
+angle_max = 720.0
+scale_amount_min = 1.65
+scale_amount_max = 2.85
+scale_amount_curve = SubResource("Curve_qrjce")
+color = Color(0.827451, 0.12549, 0.231373, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_fqrvl")
+
+[node name="PixelGroup" parent="." instance=ExtResource("2_2u3no")]
+
+[node name="Body" type="Line2D" parent="PixelGroup"]
+position = Vector2(-10, 0)
+points = PackedVector2Array(0, 0, 20, 0)
+width = 20.0
+default_color = Color(0.811765, 0.235294, 0.215686, 1)
+
+[node name="VisionArea" type="Area2D" parent="."]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="VisionArea"]
+shape = SubResource("CircleShape2D_xw3js")
+
+[node name="EnemyAnim" type="AnimationPlayer" parent="."]
+speed_scale = 2.0
+libraries = {
+"": SubResource("AnimationLibrary_vn7do")
+}
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -41.0
+offset_top = -48.5
+offset_right = -1.0
+offset_bottom = -8.5
+
+[node name="Bars" type="Control" parent="Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 62.0
+offset_bottom = 77.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("3_6igdy")
+
+[node name="LifeBar" type="ProgressBar" parent="Control/Bars"]
+custom_minimum_size = Vector2(50, 10)
+layout_mode = 2
+offset_left = 1.0
+offset_top = 20.0
+offset_right = 83.0
+offset_bottom = 30.0
+grow_horizontal = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_bq07w")
+theme_override_styles/fill = SubResource("StyleBoxFlat_7gde0")
+value = 10.0
+show_percentage = false
+script = ExtResource("4_wab7j")
+
+[node name="StunBar" type="ProgressBar" parent="Control/Bars"]
+custom_minimum_size = Vector2(50, 10)
+layout_mode = 2
+offset_left = 1.0
+offset_top = 20.0
+offset_right = 83.0
+offset_bottom = 30.0
+grow_horizontal = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_jtado")
+theme_override_styles/fill = SubResource("StyleBoxFlat_h6gbh")
+value = 50.0
+show_percentage = false
+script = ExtResource("4_wab7j")
+
+[node name="Shaker" type="Node" parent="Control/Bars" node_paths=PackedStringArray("target_node")]
+script = ExtResource("4_wtfmu")
+target_node = NodePath("..")
+target_property = &"position"
+max_value = 3.0
+constant = true
+
+[node name="Hit" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("10_go5nf")

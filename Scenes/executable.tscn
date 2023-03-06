@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://dru3yk5rkdj44"]
+
+[ext_resource type="Script" path="res://Scenes/Executable.gd" id="1_0onpq"]
+
+[node name="Executable" type="Node"]
+script = ExtResource("1_0onpq")
+enabled = false

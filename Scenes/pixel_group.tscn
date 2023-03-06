@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://b8gowa6d0pgu"]
+
+[ext_resource type="Shader" path="res://Graphic/canvaspixelate.gdshader" id="1_7gnsg"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_e05u2"]
+shader = ExtResource("1_7gnsg")
+shader_parameter/amount = 303
+
+[node name="PixelGroup" type="CanvasGroup"]
+material = SubResource("ShaderMaterial_e05u2")

@@ -1,0 +1,86 @@
+[gd_scene load_steps=12 format=3 uid="uid://c3dhs82bbt74"]
+
+[ext_resource type="PackedScene" uid="uid://jsvxlbbrskfj" path="res://Characters/Enemy/enemy.tscn" id="1_up7ft"]
+[ext_resource type="Script" path="res://Characters/Enemy/Exploder/exploder.gd" id="2_1mc08"]
+[ext_resource type="Script" path="res://addons/simple-state/classes/sequence_state.gd" id="3_wuofb"]
+[ext_resource type="Script" path="res://Characters/Enemy/Exploder/Prep.gd" id="4_koma2"]
+[ext_resource type="Script" path="res://Characters/Enemy/Exploder/Explode.gd" id="5_0f4nq"]
+[ext_resource type="Script" path="res://addons/shaker/shaker.gd" id="6_3yhkd"]
+[ext_resource type="AudioStream" uid="uid://vba7vndmwk6w" path="res://Audio/Bubble heavy 2.wav" id="7_jw30o"]
+
+[sub_resource type="Curve" id="Curve_25p4n"]
+_data = [Vector2(0.379393, 1), 0.0, 0.0, 0, 0]
+point_count = 1
+
+[sub_resource type="Curve" id="Curve_83g1r"]
+max_value = 100.0
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 100), 175.832, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_lct0s"]
+_data = [Vector2(0.71896, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_to6k7"]
+size = Vector2(60, 60)
+
+[node name="Exploder" instance=ExtResource("1_up7ft")]
+script = ExtResource("2_1mc08")
+action_dist = 30
+
+[node name="Action" type="Node" parent="AI" index="2"]
+script = ExtResource("3_wuofb")
+
+[node name="Prep" type="Node" parent="AI/Action" index="0" node_paths=PackedStringArray("target")]
+script = ExtResource("4_koma2")
+target = NodePath("../../../PixelGroup/LineBox")
+timer = 2.5
+
+[node name="Explode" type="Node" parent="AI/Action" index="1"]
+script = ExtResource("5_0f4nq")
+timer = 0.5
+
+[node name="LineBox" type="Line2D" parent="PixelGroup" index="1"]
+visible = false
+points = PackedVector2Array(-30, 30, -30, -30, 30, -30, 30, 30, -30, 30, -30, -30)
+width = 2.0
+default_color = Color(0.886275, 0.156863, 0.0941176, 1)
+
+[node name="Shaker" type="Node" parent="." index="9" node_paths=PackedStringArray("target_node")]
+script = ExtResource("6_3yhkd")
+target_node = NodePath("../CPUParticles2D2")
+target_property = &"position"
+min_value = -2.0
+max_value = 2.0
+constant = true
+duration = 0.0
+fall_off = SubResource("Curve_25p4n")
+
+[node name="CPUParticles2D2" type="CPUParticles2D" parent="." index="10"]
+emitting = false
+amount = 52
+one_shot = true
+speed_scale = 2.0
+explosiveness = 1.0
+local_coords = true
+emission_shape = 3
+emission_rect_extents = Vector2(30, 30)
+spread = 180.0
+gravity = Vector2(0, 0)
+damping_max = 100.0
+damping_curve = SubResource("Curve_83g1r")
+angle_max = 720.0
+scale_amount_min = 3.01
+scale_amount_max = 3.72
+scale_amount_curve = SubResource("Curve_lct0s")
+color = Color(0.792157, 0.0235294, 0.00392157, 1)
+
+[node name="Explode" type="AudioStreamPlayer2D" parent="." index="11"]
+stream = ExtResource("7_jw30o")
+volume_db = 5.869
+
+[node name="Hitbox" type="Area2D" parent="." index="13"]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" index="0"]
+shape = SubResource("RectangleShape2D_to6k7")

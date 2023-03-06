@@ -1,0 +1,353 @@
+[gd_scene load_steps=29 format=3 uid="uid://df005yna1v6bj"]
+
+[ext_resource type="Script" path="res://Characters/player.gd" id="1_nlj8b"]
+[ext_resource type="Script" path="res://Characters/attack_speed_bar.gd" id="2_m16nf"]
+[ext_resource type="Script" path="res://addons/shaker/shaker.gd" id="3_r8mbd"]
+[ext_resource type="Shader" path="res://Graphic/canvaspixelate.gdshader" id="3_sujrg"]
+[ext_resource type="FontFile" uid="uid://cjlkitchna1do" path="res://I-pixel-u.ttf" id="4_8ah4p"]
+[ext_resource type="Shader" path="res://Scenes/map2D.gdshader" id="4_fiq5x"]
+[ext_resource type="Texture2D" uid="uid://bch1yo4v3bs4h" path="res://Characters/sword.png" id="5_0awki"]
+[ext_resource type="Script" path="res://Characters/Sprite2D.gd" id="6_xotaj"]
+[ext_resource type="Script" path="res://Characters/SwordSplash.gd" id="7_lploq"]
+[ext_resource type="AudioStream" uid="uid://d3dlu1b4kk1kt" path="res://Audio/Retro Swooosh 07.wav" id="10_k0ikg"]
+[ext_resource type="AudioStream" uid="uid://b23aegs54upm2" path="res://Audio/Retro Swooosh 02.wav" id="11_nyker"]
+[ext_resource type="AudioStream" uid="uid://yg6422suacy1" path="res://Audio/Retro PowerUP 23.wav" id="12_63gtl"]
+[ext_resource type="AudioStream" uid="uid://b4bunacn5ygga" path="res://Audio/Retro Weapon Gun LoFi 03.wav" id="13_ol48q"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hy1wn"]
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4om6j"]
+bg_color = Color(1, 1, 1, 1)
+
+[sub_resource type="Animation" id="Animation_mc5qk"]
+resource_name = "blink"
+length = 0.3
+loop_mode = 1
+step = 0.15
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 0
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0.662745, 0.662745, 0.662745, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_i25xb"]
+_data = {
+"blink": SubResource("Animation_mc5qk")
+}
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_axr74"]
+shader = ExtResource("3_sujrg")
+shader_parameter/amount = 300
+
+[sub_resource type="SkeletonModification2DCCDIK" id="SkeletonModification2DCCDIK_dnpva"]
+target_nodepath = NodePath("../Weapon/SwordSpr")
+tip_nodepath = NodePath("Body/armRight/Bone2D2/w")
+ccdik_data_chain_length = 3
+joint_data/0/bone_index = 0
+joint_data/0/bone2d_node = NodePath("Body")
+joint_data/0/rotate_from_joint = false
+joint_data/0/enable_constraint = true
+joint_data/0/constraint_angle_min = 10.0
+joint_data/0/constraint_angle_max = -10.0
+joint_data/0/constraint_angle_invert = true
+joint_data/0/constraint_in_localspace = true
+joint_data/0/editor_draw_gizmo = true
+joint_data/1/bone_index = 1
+joint_data/1/bone2d_node = NodePath("Body/armRight")
+joint_data/1/rotate_from_joint = false
+joint_data/1/enable_constraint = true
+joint_data/1/constraint_angle_min = -120.0
+joint_data/1/constraint_angle_max = 105.0
+joint_data/1/constraint_angle_invert = true
+joint_data/1/constraint_in_localspace = true
+joint_data/1/editor_draw_gizmo = false
+joint_data/2/bone_index = 2
+joint_data/2/bone2d_node = NodePath("Body/armRight/Bone2D2")
+joint_data/2/rotate_from_joint = false
+joint_data/2/enable_constraint = true
+joint_data/2/constraint_angle_min = 160.0
+joint_data/2/constraint_angle_max = 360.0
+joint_data/2/constraint_angle_invert = false
+joint_data/2/constraint_in_localspace = true
+joint_data/2/editor_draw_gizmo = true
+
+[sub_resource type="SkeletonModificationStack2D" id="SkeletonModificationStack2D_73tta"]
+enabled = true
+modification_count = 1
+modifications/0 = SubResource("SkeletonModification2DCCDIK_dnpva")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rx0li"]
+shader = ExtResource("4_fiq5x")
+shader_parameter/color = Color(1, 1, 1, 1)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_3c3gw"]
+radius = 29.0
+
+[sub_resource type="Curve" id="Curve_2nka6"]
+_data = [Vector2(0, 0.0758122), 0.0, 0.0, 0, 0, Vector2(1, 0.277978), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Animation" id="Animation_sk4ku"]
+resource_name = "Blink"
+length = 0.2
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:default_color")
+tracks/0/interp = 0
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 0.933033, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0.560784), Color(1, 1, 1, 1), Color(1, 1, 1, 0.560784)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xe3bg"]
+_data = {
+"Blink": SubResource("Animation_sk4ku")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_rbp3i"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tujo3"]
+size = Vector2(355, 215)
+
+[sub_resource type="Curve" id="Curve_jt264"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.110241, 0.0, 0, 0]
+point_count = 2
+
+[node name="Player" type="CharacterBody2D"]
+motion_mode = 1
+floor_stop_on_slope = false
+floor_block_on_wall = false
+script = ExtResource("1_nlj8b")
+movement_speed = 100
+
+[node name="DecayTimer" type="Timer" parent="."]
+wait_time = 0.256
+
+[node name="BG" type="CanvasLayer" parent="."]
+layer = -1
+
+[node name="ColorRect" type="ColorRect" parent="BG"]
+show_behind_parent = true
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="MarginContainer" type="MarginContainer" parent="UI"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_bottom = 53
+
+[node name="Container" type="AspectRatioContainer" parent="UI/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+
+[node name="attack_speed_bar" type="ProgressBar" parent="UI/MarginContainer/Container"]
+modulate = Color(0.662745, 0.662745, 0.662745, 1)
+custom_minimum_size = Vector2(450, 25)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme_override_styles/background = SubResource("StyleBoxFlat_hy1wn")
+theme_override_styles/fill = SubResource("StyleBoxFlat_4om6j")
+max_value = 1.0
+step = 0.001
+value = 0.476
+show_percentage = false
+script = ExtResource("2_m16nf")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="UI/MarginContainer/Container/attack_speed_bar"]
+libraries = {
+"": SubResource("AnimationLibrary_i25xb")
+}
+
+[node name="Shaker" type="Node" parent="UI/MarginContainer/Container/attack_speed_bar" node_paths=PackedStringArray("target_node")]
+script = ExtResource("3_r8mbd")
+target_node = NodePath("..")
+target_property = &"position"
+max_value = 3.0
+constant = true
+
+[node name="CenterContainer" type="CenterContainer" parent="UI"]
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.719
+anchor_right = 0.5
+anchor_bottom = 0.751
+offset_left = -187.0
+offset_top = -31.0
+offset_right = 187.0
+offset_bottom = 31.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="UI/CenterContainer"]
+texture_filter = 1
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 8
+theme_override_fonts/font = ExtResource("4_8ah4p")
+theme_override_font_sizes/font_size = 47
+text = "RIGHT CLICK"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="Shaker" type="Node" parent="UI" node_paths=PackedStringArray("target_node")]
+script = ExtResource("3_r8mbd")
+target_node = NodePath("../CenterContainer/Label")
+target_property = &"position"
+min_value = -2.0
+max_value = 2.0
+constant = true
+
+[node name="CanvasGroup" type="CanvasGroup" parent="."]
+material = SubResource("ShaderMaterial_axr74")
+
+[node name="Skeleton2D" type="Skeleton2D" parent="CanvasGroup"]
+modification_stack = SubResource("SkeletonModificationStack2D_73tta")
+
+[node name="Body" type="Bone2D" parent="CanvasGroup/Skeleton2D"]
+rest = Transform2D(1, 0, 0, 1, 0, 0)
+
+[node name="armRight" type="Bone2D" parent="CanvasGroup/Skeleton2D/Body"]
+position = Vector2(5, 0)
+scale = Vector2(0.999907, 0.999907)
+rest = Transform2D(0.999907, 0, 0, 0.999907, 5, 0)
+
+[node name="Bone2D2" type="Bone2D" parent="CanvasGroup/Skeleton2D/Body/armRight"]
+position = Vector2(12, 0)
+scale = Vector2(0.999928, 0.999928)
+rest = Transform2D(0.999928, 0, 0, 0.999928, 12, 0)
+
+[node name="w" type="Bone2D" parent="CanvasGroup/Skeleton2D/Body/armRight/Bone2D2"]
+visible = false
+position = Vector2(6, 0)
+rest = Transform2D(1, 0, 0, 1, 6, 0)
+auto_calculate_length_and_angle = false
+length = 5.0
+bone_angle = 0.0
+
+[node name="Line2D3" type="Line2D" parent="CanvasGroup/Skeleton2D/Body/armRight/Bone2D2"]
+position = Vector2(0.151363, -0.245598)
+scale = Vector2(1.00028, 1.00028)
+points = PackedVector2Array(0, 0, 6, 0)
+width = 6.229
+
+[node name="Line2D" type="Line2D" parent="CanvasGroup/Skeleton2D/Body/armRight"]
+scale = Vector2(1.00009, 1.00009)
+points = PackedVector2Array(0, 0, 12, 0)
+width = 6.229
+
+[node name="Body" type="Line2D" parent="CanvasGroup/Skeleton2D/Body"]
+position = Vector2(0, 7.5)
+points = PackedVector2Array(0, 0, 0, -15)
+width = 15.0
+
+[node name="Weapon" type="Node2D" parent="CanvasGroup"]
+show_behind_parent = true
+texture_filter = 1
+position = Vector2(5, 2)
+
+[node name="SwordSpr" type="Sprite2D" parent="CanvasGroup/Weapon"]
+show_behind_parent = true
+material = SubResource("ShaderMaterial_rx0li")
+position = Vector2(-3, -5)
+scale = Vector2(0.624965, 0.968269)
+texture = ExtResource("5_0awki")
+offset = Vector2(0, -13.455)
+script = ExtResource("6_xotaj")
+
+[node name="Marker2D" type="Marker2D" parent="CanvasGroup/Weapon/SwordSpr"]
+position = Vector2(0, -28.9176)
+
+[node name="SwordSplash" type="Line2D" parent="CanvasGroup/Weapon"]
+position = Vector2(-5, -2)
+points = PackedVector2Array(0, 0, 0, 0)
+script = ExtResource("7_lploq")
+connected_node = NodePath("../SwordSpr/Marker2D")
+
+[node name="Area2D" type="Area2D" parent="CanvasGroup/Weapon"]
+position = Vector2(18, -2)
+monitoring = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CanvasGroup/Weapon/Area2D"]
+shape = SubResource("CircleShape2D_3c3gw")
+
+[node name="Slash" type="AudioStreamPlayer2D" parent="CanvasGroup/Weapon"]
+stream = ExtResource("10_k0ikg")
+
+[node name="ExecLine" type="Line2D" parent="CanvasGroup"]
+points = PackedVector2Array(0, 0, 200, 0)
+width = 22.832
+width_curve = SubResource("Curve_2nka6")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasGroup/ExecLine"]
+autoplay = "Blink"
+libraries = {
+"": SubResource("AnimationLibrary_xe3bg")
+}
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(0, 1)
+zoom = Vector2(1.664, 1.664)
+process_callback = 0
+position_smoothing_enabled = true
+position_smoothing_speed = 6.011
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_rbp3i")
+
+[node name="ExecArea" type="Area2D" parent="."]
+visible = false
+position = Vector2(30, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ExecArea"]
+position = Vector2(159, -2)
+shape = SubResource("RectangleShape2D_tujo3")
+
+[node name="Shaker" type="Node" parent="." node_paths=PackedStringArray("target_node")]
+script = ExtResource("3_r8mbd")
+target_node = NodePath("../Camera2D")
+target_property = &"position"
+min_value = -25.0
+max_value = 25.0
+auto_start = true
+duration = 0.7
+fall_off = SubResource("Curve_jt264")
+
+[node name="Execute" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("11_nyker")
+
+[node name="CanExecute" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("12_63gtl")
+volume_db = -11.185
+
+[node name="Hit" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("13_ol48q")

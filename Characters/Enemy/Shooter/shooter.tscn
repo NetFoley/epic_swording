@@ -1,0 +1,56 @@
+[gd_scene load_steps=10 format=3]
+
+[ext_resource type="PackedScene" uid="uid://2phg5n666sm4" path="res://Characters/Enemy/enemy.tscn" id="1_kk78j"]
+[ext_resource type="Script" path="res://Characters/Enemy/Shooter/shooter.gd" id="2_apb61"]
+[ext_resource type="Script" path="res://addons/simple-state/classes/sequence_state.gd" id="3_suyh4"]
+[ext_resource type="Script" path="res://Characters/Enemy/Shooter/Prep.gd" id="4_q58jg"]
+[ext_resource type="Script" path="res://Characters/Enemy/Shooter/Shoot.gd" id="5_k73ap"]
+[ext_resource type="Script" path="res://Characters/Enemy/Shooter/Rotate.gd" id="6_dmctp"]
+[ext_resource type="AudioStream" uid="uid://b3e4pgaafk5og" path="res://Audio/Hit damage 1.wav" id="7_x58ol"]
+
+[sub_resource type="Curve" id="Curve_e5t5d"]
+_data = [Vector2(0, 1.02422), 0.0, -0.840108, 0, 0, Vector2(1, 0.184115), -0.840108, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_xlmwt"]
+_data = [Vector2(0, 0.920578), 0.0, 0.0, 0, 0, Vector2(1, 0.00361001), -2.07994, 0.0, 0, 0]
+point_count = 2
+
+[node name="Shooter" instance=ExtResource("1_kk78j")]
+script = ExtResource("2_apb61")
+bullet_path = "res://Scenes/Bullet.tscn"
+action_dist = 148
+
+[node name="Action" type="Node" parent="AI" index="2"]
+script = ExtResource("3_suyh4")
+loops = 0
+
+[node name="Prep" type="Node" parent="AI/Action" index="0" node_paths=PackedStringArray("target")]
+script = ExtResource("4_q58jg")
+target = NodePath("../../../PixelGroup/ShootLine")
+timer = 2.0
+
+[node name="Shoot" type="Node" parent="AI/Action" index="1"]
+script = ExtResource("5_k73ap")
+timer = 0.5
+
+[node name="Rotate" type="Node" parent="AI/Action" index="2" node_paths=PackedStringArray("target")]
+script = ExtResource("6_dmctp")
+target = NodePath("../../../PixelGroup")
+timer = 1.0
+
+[node name="Body" parent="PixelGroup" index="0"]
+width_curve = SubResource("Curve_e5t5d")
+
+[node name="ShootLine" type="Line2D" parent="PixelGroup" index="1"]
+points = PackedVector2Array(0, 0, 100, 0)
+width = 3.0
+width_curve = SubResource("Curve_xlmwt")
+default_color = Color(1, 0.0901961, 0.0784314, 1)
+
+[node name="CollisionShape2D" parent="VisionArea" index="0"]
+visible = false
+
+[node name="Shoot" type="AudioStreamPlayer2D" parent="." index="10"]
+stream = ExtResource("7_x58ol")
+volume_db = 8.117

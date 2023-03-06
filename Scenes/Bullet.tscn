@@ -1,0 +1,42 @@
+[gd_scene load_steps=7 format=3 uid="uid://783ivjitkq44"]
+
+[ext_resource type="Script" path="res://Scenes/Bullet.gd" id="1_gv7oj"]
+[ext_resource type="PackedScene" uid="uid://dru3yk5rkdj44" path="res://Scenes/executable.tscn" id="1_icypi"]
+[ext_resource type="PackedScene" uid="uid://b8gowa6d0pgu" path="res://Scenes/pixel_group.tscn" id="2_g31w2"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_oj2at"]
+radius = 4.0
+
+[sub_resource type="Curve" id="Curve_x1tkb"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_by3xy"]
+radius = 5.0
+
+[node name="Bullet" type="CharacterBody2D"]
+motion_mode = 1
+script = ExtResource("1_gv7oj")
+
+[node name="Executable" parent="." instance=ExtResource("1_icypi")]
+enabled = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_oj2at")
+disabled = true
+
+[node name="PixelGroup" parent="." instance=ExtResource("2_g31w2")]
+
+[node name="Line2D" type="Line2D" parent="PixelGroup"]
+points = PackedVector2Array(-5, 0, 5, 0)
+width = 5.0
+width_curve = SubResource("Curve_x1tkb")
+default_color = Color(1, 0.184314, 0.0627451, 1)
+
+[node name="Hitbox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("CircleShape2D_by3xy")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 20.0
