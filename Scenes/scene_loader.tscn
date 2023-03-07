@@ -1,0 +1,26 @@
+[gd_scene load_steps=3 format=3 uid="uid://51rgo3dhhmym"]
+
+[ext_resource type="FontFile" uid="uid://cjlkitchna1do" path="res://I-pixel-u.ttf" id="1_dxn7x"]
+[ext_resource type="Script" path="res://Scenes/SceneLoader.gd" id="1_mjbx7"]
+
+[node name="SceneLoader" type="HBoxContainer"]
+custom_minimum_size = Vector2(400, 0)
+alignment = 1
+script = ExtResource("1_mjbx7")
+scene_goal = "res://Scenes/map.tscn"
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_dxn7x")
+theme_override_font_sizes/font_size = 56
+text = "Level 1"
+
+[node name="VSeparator" type="VSeparator" parent="."]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_dxn7x")
+theme_override_font_sizes/font_size = 45
+text = "0.00"
+vertical_alignment = 1

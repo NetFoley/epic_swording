@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://bc6g1makd3x2q"]
+
+[ext_resource type="PackedScene" uid="uid://dxu4k8vxb7sj6" path="res://Characters/Enemy/Shooter/shooter.tscn" id="1_3i0nx"]
+[ext_resource type="Script" path="res://Characters/Enemy/TargetShooter/target_shooter.gd" id="2_msk07"]
+
+[node name="TargetShooter" instance=ExtResource("1_3i0nx")]
+script = ExtResource("2_msk07")
+bullet_path = "res://Scenes/targeted_bullet.tscn"
+
+[node name="AI" parent="." index="1"]
+debug_mode = true
+
+[node name="Body" parent="PixelGroup" index="0"]
+points = PackedVector2Array(0, 0, 16, 0, 0, -10, 19, 0, 0, 10, 16, 0)
+width = 9.133
+
+[node name="ShootLine" parent="PixelGroup" index="1"]
+default_color = Color(0.239216, 0.643137, 0, 1)

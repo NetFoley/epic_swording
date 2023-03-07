@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://cfkjy1q0hw3ar"]
+
+[ext_resource type="PackedScene" uid="uid://783ivjitkq44" path="res://Scenes/Bullet.tscn" id="1_m8xbo"]
+[ext_resource type="Script" path="res://Scenes/targeted_bullet.gd" id="2_uf37j"]
+
+[node name="TargetedBullet" instance=ExtResource("1_m8xbo")]
+script = ExtResource("2_uf37j")
+speed = 100.0
+
+[node name="Line2D" parent="PixelGroup" index="0"]
+default_color = Color(0.415686, 0.803922, 0, 1)
+
+[node name="DeleteTimer" parent="." index="4"]
+wait_time = 8.0

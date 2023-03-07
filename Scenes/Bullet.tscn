@@ -38,5 +38,5 @@ default_color = Color(1, 0.184314, 0.0627451, 1)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 shape = SubResource("CircleShape2D_by3xy")
 
-[node name="Timer" type="Timer" parent="."]
+[node name="DeleteTimer" type="Timer" parent="."]
 wait_time = 20.0

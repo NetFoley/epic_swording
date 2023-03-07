@@ -23,6 +23,7 @@ var executable = false:
 			
 
 signal new_visible_body(body)
+signal died()
 
 @export var max_stun_value = 6
 var stun_value : float = 0:
@@ -39,6 +40,7 @@ var stun_value : float = 0:
 			die()
 
 func _ready():
+	GAME.add_enemy(self)
 	vision_area.get_child(0).shape.set_radius(vision_range)
 	vision_area.body_entered.connect(_on_visible_body)
 	life_changed.connect(life_bar._on_life_changed)
@@ -53,7 +55,7 @@ func _on_visible_body(body):
 
 func _physics_process(_delta):
 	if decaying_stun:
-		stun_value = clamp(stun_value - 0.02, 0, max_stun_value)
+		stun_value = clamp(stun_value - 0.02, 0, max_stun_value*2)
 	move_and_slide()
 	
 
@@ -71,6 +73,7 @@ func hit(value):
 	particles.emitting = true
 
 func die():
+	died.emit(self)
 	var particles = $CPUParticles2D.duplicate()
 	particles.position = $CPUParticles2D.global_position
 	particles.amount = 20

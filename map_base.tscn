@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://bq0axrhc4pc8a"]
+
+[ext_resource type="PackedScene" uid="uid://dtor5i8yxk2sk" path="res://Scenes/map_base.tscn" id="1_hupm3"]
+[ext_resource type="Script" path="res://MapBase.gd" id="2_lap6t"]
+
+[node name="MapBase" instance=ExtResource("1_hupm3")]
+script = ExtResource("2_lap6t")

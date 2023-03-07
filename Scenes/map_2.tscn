@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://dtor5i8yxk2sk" path="res://Scenes/map_base.tscn" id="1_6lwxm"]
 [ext_resource type="PackedScene" uid="uid://c3dhs82bbt74" path="res://Characters/Enemy/Exploder/exploder.tscn" id="2_7uapo"]
-[ext_resource type="PackedScene" uid="uid://c33td1ojg08o6" path="res://Characters/Enemy/Shooter/shooter.tscn" id="3_50mrv"]
+[ext_resource type="PackedScene" uid="uid://dxu4k8vxb7sj6" path="res://Characters/Enemy/Shooter/shooter.tscn" id="3_50mrv"]
 
 [node name="Map2" instance=ExtResource("1_6lwxm")]
 
@@ -14,90 +14,120 @@ position = Vector2(45, 100)
 
 [node name="Exploder" parent="Ennemies/Exploder" index="0" instance=ExtResource("2_7uapo")]
 position = Vector2(209, 97)
+vision_range = 200
 
 [node name="Exploder2" parent="Ennemies/Exploder" index="1" instance=ExtResource("2_7uapo")]
 position = Vector2(338, 94)
+vision_range = 200
 
 [node name="Exploder3" parent="Ennemies/Exploder" index="2" instance=ExtResource("2_7uapo")]
 position = Vector2(211, 221)
+vision_range = 200
 
 [node name="Exploder4" parent="Ennemies/Exploder" index="3" instance=ExtResource("2_7uapo")]
 position = Vector2(218, 391)
+vision_range = 200
 
 [node name="Exploder5" parent="Ennemies/Exploder" index="4" instance=ExtResource("2_7uapo")]
 position = Vector2(486, 352)
+vision_range = 200
 
 [node name="Exploder6" parent="Ennemies/Exploder" index="5" instance=ExtResource("2_7uapo")]
 position = Vector2(513, 246)
+vision_range = 200
 
 [node name="Exploder7" parent="Ennemies/Exploder" index="6" instance=ExtResource("2_7uapo")]
 position = Vector2(648, 249)
+vision_range = 200
 
 [node name="Exploder8" parent="Ennemies/Exploder" index="7" instance=ExtResource("2_7uapo")]
 position = Vector2(736, 164)
+vision_range = 200
 
 [node name="Exploder9" parent="Ennemies/Exploder" index="8" instance=ExtResource("2_7uapo")]
 position = Vector2(753, 346)
+vision_range = 200
 
 [node name="Exploder10" parent="Ennemies/Exploder" index="9" instance=ExtResource("2_7uapo")]
 position = Vector2(723, 21)
+vision_range = 200
 
 [node name="Exploder11" parent="Ennemies/Exploder" index="10" instance=ExtResource("2_7uapo")]
 position = Vector2(860, 85)
+vision_range = 200
 
 [node name="Exploder12" parent="Ennemies/Exploder" index="11" instance=ExtResource("2_7uapo")]
 position = Vector2(1102, 5)
+vision_range = 200
 
 [node name="Exploder13" parent="Ennemies/Exploder" index="12" instance=ExtResource("2_7uapo")]
 position = Vector2(1088, 183)
+vision_range = 200
 
 [node name="Exploder14" parent="Ennemies/Exploder" index="13" instance=ExtResource("2_7uapo")]
 position = Vector2(983, 330)
+vision_range = 200
 
 [node name="Exploder15" parent="Ennemies/Exploder" index="14" instance=ExtResource("2_7uapo")]
 position = Vector2(792, 421)
+vision_range = 200
 
 [node name="Exploder16" parent="Ennemies/Exploder" index="15" instance=ExtResource("2_7uapo")]
 position = Vector2(793, 470)
+vision_range = 200
 
 [node name="Exploder17" parent="Ennemies/Exploder" index="16" instance=ExtResource("2_7uapo")]
 position = Vector2(1093, 417)
+vision_range = 200
 
 [node name="Shooter" parent="Ennemies/Shooter" index="0" instance=ExtResource("3_50mrv")]
 position = Vector2(274, 33)
+vision_range = 200
 
 [node name="Shooter2" parent="Ennemies/Shooter" index="1" instance=ExtResource("3_50mrv")]
 position = Vector2(278, 160)
+vision_range = 200
 
 [node name="Shooter3" parent="Ennemies/Shooter" index="2" instance=ExtResource("3_50mrv")]
 position = Vector2(447, 222)
+vision_range = 200
 
 [node name="Shooter4" parent="Ennemies/Shooter" index="3" instance=ExtResource("3_50mrv")]
 position = Vector2(305, 321)
+vision_range = 200
 
 [node name="Shooter5" parent="Ennemies/Shooter" index="4" instance=ExtResource("3_50mrv")]
 position = Vector2(152, 323)
+vision_range = 200
 
 [node name="Shooter6" parent="Ennemies/Shooter" index="5" instance=ExtResource("3_50mrv")]
 position = Vector2(59, 229)
+vision_range = 200
 
 [node name="Shooter7" parent="Ennemies/Shooter" index="6" instance=ExtResource("3_50mrv")]
 position = Vector2(51, 381)
+vision_range = 200
 
 [node name="Shooter8" parent="Ennemies/Shooter" index="7" instance=ExtResource("3_50mrv")]
 position = Vector2(825, 249)
+vision_range = 200
 
 [node name="Shooter9" parent="Ennemies/Shooter" index="8" instance=ExtResource("3_50mrv")]
 position = Vector2(1000, 245)
+vision_range = 200
 
 [node name="Shooter10" parent="Ennemies/Shooter" index="9" instance=ExtResource("3_50mrv")]
 position = Vector2(857, 170)
+vision_range = 200
 
 [node name="Shooter11" parent="Ennemies/Shooter" index="10" instance=ExtResource("3_50mrv")]
 position = Vector2(853, 3)
+vision_range = 200
 
 [node name="Shooter12" parent="Ennemies/Shooter" index="11" instance=ExtResource("3_50mrv")]
 position = Vector2(590, 45)
+vision_range = 200
 
 [node name="Shooter13" parent="Ennemies/Shooter" index="12" instance=ExtResource("3_50mrv")]
 position = Vector2(988, 476)
+vision_range = 200

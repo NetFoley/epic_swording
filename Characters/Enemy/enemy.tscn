@@ -78,13 +78,13 @@ wall_min_slide_angle = 0.0
 script = ExtResource("1_s5vcf")
 movement_speed = 26
 action_dist = 70
+vision_range = 400
 
 [node name="Executable" parent="." instance=ExtResource("2_0j6gl")]
 
 [node name="AI" type="Node" parent="." node_paths=PackedStringArray("target")]
 script = ExtResource("6_ilq18")
 target = NodePath("..")
-debug_mode = true
 
 [node name="Idle" type="Node" parent="AI"]
 script = ExtResource("7_852rs")

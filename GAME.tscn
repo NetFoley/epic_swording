@@ -1,12 +1,19 @@
-[gd_scene load_steps=3 format=3 uid="uid://ccjdj51ccopxa"]
+[gd_scene load_steps=4 format=3 uid="uid://ccjdj51ccopxa"]
 
 [ext_resource type="Script" path="res://GAME.gd" id="1_tl76c"]
 [ext_resource type="AudioStream" uid="uid://d22fv7pi275j2" path="res://Audio/Ludum Dare 30 - Track 2.wav" id="2_dyw1j"]
+[ext_resource type="AudioStream" uid="uid://bnohqmpqpxqw" path="res://Audio/VGMA Challenge - July 17th.wav" id="3_5n2t7"]
 
 [node name="GAME" type="Node"]
 script = ExtResource("1_tl76c")
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+[node name="GameMusic" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_dyw1j")
 volume_db = -4.521
 autoplay = true
+
+[node name="MenuMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_5n2t7")
+
+[node name="EndSlowMo" type="Timer" parent="."]
+one_shot = true

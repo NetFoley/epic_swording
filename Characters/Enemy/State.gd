@@ -19,5 +19,5 @@ func _on_visible_body(body):
 	if body is Player:
 		target_node = body
 
-func _on_target_changed(target):
+func _on_target_changed(_target):
 	change_state_node($Chase)

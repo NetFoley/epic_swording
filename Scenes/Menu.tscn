@@ -1,0 +1,43 @@
+[gd_scene load_steps=3 format=3 uid="uid://bsy7gtdhay036"]
+
+[ext_resource type="Script" path="res://Scenes/Menu.gd" id="1_lkyyw"]
+[ext_resource type="PackedScene" uid="uid://51rgo3dhhmym" path="res://Scenes/scene_loader.tscn" id="2_feykh"]
+
+[node name="Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_lkyyw")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -33.5
+offset_top = -50.5
+offset_right = 33.5
+offset_bottom = 50.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 32
+
+[node name="SceneLoader" parent="VBoxContainer" instance=ExtResource("2_feykh")]
+layout_mode = 2
+button_text = "LEVEL 1"
+
+[node name="SceneLoader2" parent="VBoxContainer" instance=ExtResource("2_feykh")]
+layout_mode = 2
+scene_goal = "res://Scenes/map_2.tscn"
+button_text = "LEVEL 2"
+
+[node name="SceneLoader3" parent="VBoxContainer" instance=ExtResource("2_feykh")]
+layout_mode = 2
+scene_goal = "res://Scenes/endless.tscn"
+button_text = "ENDLESS"
+survival = true

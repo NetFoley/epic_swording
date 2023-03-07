@@ -22,11 +22,12 @@ _data = [Vector2(0.71896, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_to6k7"]
-size = Vector2(60, 60)
+size = Vector2(80, 80)
 
 [node name="Exploder" instance=ExtResource("1_up7ft")]
 script = ExtResource("2_1mc08")
-action_dist = 30
+action_dist = 40
+max_stun_value = 8
 
 [node name="Action" type="Node" parent="AI" index="2"]
 script = ExtResource("3_wuofb")
@@ -42,7 +43,7 @@ timer = 0.5
 
 [node name="LineBox" type="Line2D" parent="PixelGroup" index="1"]
 visible = false
-points = PackedVector2Array(-30, 30, -30, -30, 30, -30, 30, 30, -30, 30, -30, -30)
+points = PackedVector2Array(-40, 40, -40, -40, 40, -40, 40, 40, -40, 40, -40, -40)
 width = 2.0
 default_color = Color(0.886275, 0.156863, 0.0941176, 1)
 
@@ -53,7 +54,6 @@ target_property = &"position"
 min_value = -2.0
 max_value = 2.0
 constant = true
-duration = 0.0
 fall_off = SubResource("Curve_25p4n")
 
 [node name="CPUParticles2D2" type="CPUParticles2D" parent="." index="10"]
@@ -64,7 +64,7 @@ speed_scale = 2.0
 explosiveness = 1.0
 local_coords = true
 emission_shape = 3
-emission_rect_extents = Vector2(30, 30)
+emission_rect_extents = Vector2(40, 40)
 spread = 180.0
 gravity = Vector2(0, 0)
 damping_max = 100.0
@@ -80,7 +80,6 @@ stream = ExtResource("7_jw30o")
 volume_db = 5.869
 
 [node name="Hitbox" type="Area2D" parent="." index="13"]
-visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" index="0"]
 shape = SubResource("RectangleShape2D_to6k7")

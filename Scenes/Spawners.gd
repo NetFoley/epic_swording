@@ -3,6 +3,7 @@ class_name EndlessSpawnManager
 
 @export var exploder_container : NodePath
 @export var shooter_container : NodePath
+@export var add_vision_range = 0
 
 var targetted_spawner : int
 var enemy_to_spawn_type : PackedScene #1 exploder #2 shooter
@@ -20,10 +21,11 @@ func spawn_enemy() -> void:
 	if is_instance_valid(get_child(targetted_spawner)):
 		enemy_to_spawn_type = get_enemy_to_spawn_type()
 		var enemy_to_spawn_object = enemy_to_spawn_type.instantiate()
+		enemy_to_spawn_object.vision_range += add_vision_range
 		enemy_to_spawn_object.set_position(get_child(targetted_spawner).global_position)
 		if enemyid == 1: get_node(exploder_container).add_child(enemy_to_spawn_object, true)
 		else: get_node(shooter_container).add_child(enemy_to_spawn_object, true)
-		%SpawnTimer.set_wait_time(%SpawnTimer.get_wait_time() * 0.98)
+		%SpawnTimer.set_wait_time(clamp(%SpawnTimer.get_wait_time() * 0.98, 0.3, 100.0))
 		print(%SpawnTimer.get_wait_time())
 
 func get_random_spawner_id() -> int:
