@@ -136,7 +136,6 @@ motion_mode = 1
 floor_stop_on_slope = false
 floor_block_on_wall = false
 script = ExtResource("1_nlj8b")
-movement_speed = 100
 
 [node name="DecayTimer" type="Timer" parent="."]
 wait_time = 0.256
@@ -234,11 +233,14 @@ material = SubResource("ShaderMaterial_axr74")
 modification_stack = SubResource("SkeletonModificationStack2D_73tta")
 
 [node name="Body" type="Bone2D" parent="CanvasGroup/Skeleton2D"]
+rotation = 0.174533
+scale = Vector2(1, 1)
 rest = Transform2D(1, 0, 0, 1, 0, 0)
 
 [node name="armRight" type="Bone2D" parent="CanvasGroup/Skeleton2D/Body"]
-position = Vector2(5, 0)
-scale = Vector2(0.999907, 0.999907)
+position = Vector2(5.00008, 1.11461e-05)
+rotation = -2.09439
+scale = Vector2(0.999921, 0.999921)
 rest = Transform2D(0.999907, 0, 0, 0.999907, 5, 0)
 
 [node name="Bone2D2" type="Bone2D" parent="CanvasGroup/Skeleton2D/Body/armRight"]

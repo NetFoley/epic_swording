@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=3 uid="uid://dtor5i8yxk2sk"]
+
+[ext_resource type="Texture2D" uid="uid://d1v31r7wtgons" path="res://white_16_16.png" id="1_7jpqq"]
+[ext_resource type="PackedScene" uid="uid://df005yna1v6bj" path="res://Characters/player.tscn" id="2_dg6dc"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_k31x8"]
+resource_name = "walls"
+texture = ExtResource("1_7jpqq")
+0:0/0 = 0
+0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:0/0/physics_layer_0/angular_velocity = 0.0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, -8, 8, 8, 8, 8, -8)
+
+[sub_resource type="TileSet" id="TileSet_724rl"]
+physics_layer_0/collision_layer = 1
+sources/0 = SubResource("TileSetAtlasSource_k31x8")
+
+[node name="MapBase" type="Node2D"]
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = SubResource("TileSet_724rl")
+format = 2
+
+[node name="Player" type="Node" parent="."]
+
+[node name="Player" parent="Player" instance=ExtResource("2_dg6dc")]
+
+[node name="Ennemies" type="Node" parent="."]
+
+[node name="Exploder" type="Node" parent="Ennemies"]
+
+[node name="Shooter" type="Node" parent="Ennemies"]
