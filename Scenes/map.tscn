@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://df005yna1v6bj" path="res://Characters/player.tscn" id="1_gu112"]
 [ext_resource type="PackedScene" uid="uid://c3dhs82bbt74" path="res://Characters/Enemy/Exploder/exploder.tscn" id="1_kaaal"]
-[ext_resource type="PackedScene" path="res://Characters/Enemy/Shooter/shooter.tscn" id="3_qft1v"]
+[ext_resource type="PackedScene" uid="uid://c33td1ojg08o6" path="res://Characters/Enemy/Shooter/shooter.tscn" id="3_qft1v"]
 [ext_resource type="Texture2D" uid="uid://d1v31r7wtgons" path="res://white_16_16.png" id="5_kjc0u"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_k31x8"]
