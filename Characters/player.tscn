@@ -279,17 +279,18 @@ position = Vector2(5, 2)
 show_behind_parent = true
 material = SubResource("ShaderMaterial_rx0li")
 position = Vector2(-3, -5)
-scale = Vector2(0.624965, 0.968269)
 texture = ExtResource("5_0awki")
 offset = Vector2(0, -13.455)
 script = ExtResource("6_xotaj")
 
 [node name="Marker2D" type="Marker2D" parent="CanvasGroup/Weapon/SwordSpr"]
-position = Vector2(0, -28.9176)
+position = Vector2(0, -20)
 
 [node name="SwordSplash" type="Line2D" parent="CanvasGroup/Weapon"]
 position = Vector2(-5, -2)
 points = PackedVector2Array(0, 0, 0, 0)
+width = 20.0
+default_color = Color(1, 1, 1, 0.564706)
 script = ExtResource("7_lploq")
 connected_node = NodePath("../SwordSpr/Marker2D")
 

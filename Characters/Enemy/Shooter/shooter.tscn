@@ -1,6 +1,6 @@
-[gd_scene load_steps=10 format=3]
+[gd_scene load_steps=10 format=3 uid="uid://dxu4k8vxb7sj6"]
 
-[ext_resource type="PackedScene" uid="uid://2phg5n666sm4" path="res://Characters/Enemy/enemy.tscn" id="1_kk78j"]
+[ext_resource type="PackedScene" uid="uid://jsvxlbbrskfj" path="res://Characters/Enemy/enemy.tscn" id="1_kk78j"]
 [ext_resource type="Script" path="res://Characters/Enemy/Shooter/shooter.gd" id="2_apb61"]
 [ext_resource type="Script" path="res://addons/simple-state/classes/sequence_state.gd" id="3_suyh4"]
 [ext_resource type="Script" path="res://Characters/Enemy/Shooter/Prep.gd" id="4_q58jg"]
@@ -20,6 +20,7 @@ point_count = 2
 script = ExtResource("2_apb61")
 bullet_path = "res://Scenes/Bullet.tscn"
 action_dist = 148
+max_stun_value = 3
 
 [node name="Action" type="Node" parent="AI" index="2"]
 script = ExtResource("3_suyh4")

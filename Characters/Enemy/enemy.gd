@@ -31,7 +31,7 @@ var stun_value : float = 0:
 		stun_bar.value = value
 		executable = stun_value >= max_stun_value
 		
-var life = 20:
+@export var life = 20:
 	set(value):
 		life = value
 		life_changed.emit(value)
